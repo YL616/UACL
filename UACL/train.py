@@ -5,6 +5,7 @@ from torch.nn.functional import normalize
 import os
 from torch.utils.tensorboard import SummaryWriter
 
+
 # os.environ["CUDA_VISIBLE_DEVICES"] = "3";
 
 def train_net(net, data_loader, optimizer, batch_size, zeta,epoch,max_epochs,num_class):
