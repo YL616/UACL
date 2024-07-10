@@ -74,7 +74,7 @@ def loglikelihood_loss(y, alpha):
 
 def mse_loss(y, alpha, annealing_coef, num_classes, batch_size, with_kldiv=1, with_avuloss=0):   #loss_type='mse'
     """Used only for loss_type == 'mse'
-    y: the one-hot labels (batchsize, num_classes)   #可是这里仍然是one-hot，没有multi-hot？
+    y: the one-hot labels (batchsize, num_classes)   
     alpha: the predictions (batchsize, num_classes)
     epoch_num: the current training epoch
     """
@@ -147,7 +147,7 @@ def edl_loss(func, y, alpha, annealing_coef, target, num_classes, batch_size, ep
     label_num = torch.sum(y, dim=1, keepdim=True)
 
     temp = (1 / alpha) * y
-    g = (1 - uncertainty.detach()) * label_num * torch.div(temp, torch.sum(temp, dim=1, keepdim=True)) #对应3.3节中，使用u生成软标签的公式.  div做除法
+    g = (1 - uncertainty.detach()) * label_num * torch.div(temp, torch.sum(temp, dim=1, keepdim=True))
     A = torch.sum(g * (func(S) - func(alpha)), dim=1, keepdim=True)
 
     losses.update({'loss_cls': A})
@@ -212,7 +212,7 @@ def my_compute_annealing_coef(annealing_method,epoch_num, total_epoch,annealing_
 
 # 代替原来的_forward()函数
 # 原output = outputs['cas'] * outputs['attn']
-def my_WSTAL_loss(output,target,epoch_num,max_epochs,evidence,loss_type,num_classes,batch_size):  # output是经过判断，每个类别的得分情况， target是真实标签,按论文里描述的，应该是multi-hot，num_classes应该是总的类别数
+def my_WSTAL_loss(output,target,epoch_num,max_epochs,evidence,loss_type,num_classes,batch_size):  
     if evidence == 'relu':
         evidence = relu_evidence(output).cuda()
     elif evidence == 'exp':
@@ -241,7 +241,7 @@ def my_WSTAL_loss(output,target,epoch_num,max_epochs,evidence,loss_type,num_clas
 
     # results.get('loss_kl') +
     if loss_type == 'log':
-        loss =(torch.sum((torch.sum(results.get('loss_cls') + results.get('loss_avu'), dim=0, keepdim=True)/batch_size),dim=1)/batch_size).cuda() #因为选择edl_Loss时，得到的loss是个矩阵，所以要两次sum
+        loss =(torch.sum((torch.sum(results.get('loss_cls') + results.get('loss_avu'), dim=0, keepdim=True)/batch_size),dim=1)/batch_size).cuda() 
     elif loss_type == 'mse':
         loss = (torch.sum(results.get('loss_cls') + results.get('loss_kl'), dim=0, keepdim=True) / batch_size).cuda()
 
