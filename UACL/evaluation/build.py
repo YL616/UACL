@@ -2,7 +2,6 @@ import torch
 
 from .lr_scheduler import LRSchedulerWithWarmup
 
-
 def build_optimizer(args, model):
     params = []
 
