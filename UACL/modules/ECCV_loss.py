@@ -4,6 +4,7 @@ import torch
 import torch.nn.functional as F
 from modules import transform, resnet, network, contrastive_loss,my_evidence_loss,my_sdm_loss,computeLabel,DELU_loss
 
+
 def my_ECCV_loss(z_i, z_j, batch_size,num_classs,func,epoch, max_epochs, tau=0.1):
     z = torch.cat((z_i, z_j), dim=0)
     tau = torch.tensor(tau);
