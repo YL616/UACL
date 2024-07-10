@@ -2,7 +2,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 def compute_sdm(image_fetures, text_fetures,batch_size, pid, logit_scale, image_id=None, factor=0.3, epsilon=1e-8):
     """
     Similarity Distribution Matching
