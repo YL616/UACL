@@ -6,7 +6,7 @@ import torch.nn.functional as F
 def deleteHigh_Uncertainty(cosine_similarity_matrix,uncertainty,batch_size,k_similar,k_uncertrain,k_cut):
     cosine_similarity_matrix = torch.tensor(cosine_similarity_matrix)
     top_k_values,top_k_indexs = torch.topk(cosine_similarity_matrix,k_similar,dim=1,largest=True)
-    k_simi_label = torch.zeros(batch_size,batch_size)    # 这里可以换成C3中的mask矩阵
+    k_simi_label = torch.zeros(batch_size,batch_size)    
     for i in range(batch_size):
         for k in top_k_indexs[i]:
             k_simi_label[i][k] = 1;
@@ -19,7 +19,7 @@ def deleteHigh_Uncertainty(cosine_similarity_matrix,uncertainty,batch_size,k_sim
 
     union_label = torch.zeros(batch_size,batch_size)
     for i in range(batch_size):
-        if k_uncer_label[i]==1:  # 如果不确定性高，，，
+        if k_uncer_label[i]==1:  
             union_label[i] = cut_one(k_simi_label[i],k_cut,batch_size)
         else:
             union_label[i] = k_simi_label[i]
