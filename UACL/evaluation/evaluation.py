@@ -5,7 +5,6 @@ import torch.nn as nn
 
 nmi = normalized_mutual_info_score
 ari = adjusted_rand_score
-
 def acc(y_true, y_pred):
     """
     Calculate clustering accuracy. Require scikit-learn installed
