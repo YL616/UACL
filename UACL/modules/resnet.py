@@ -29,14 +29,14 @@ class ResNet(nn.Module):
         self.bn1 = norm_layer(self.inplanes)
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
-        self.layer1 = self._make_layer(block, 64, layers[0])   #使用了 block 类型、64个输出通道和layers[0]个块
+        self.layer1 = self._make_layer(block, 64, layers[0])   #
         self.layer2 = self._make_layer(block, 128, layers[1], stride=2,
                                        dilate=replace_stride_with_dilation[0])
         self.layer3 = self._make_layer(block, 256, layers[2], stride=2,
                                        dilate=replace_stride_with_dilation[1])
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2,
                                        dilate=replace_stride_with_dilation[2])
-        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))      # 自适应平均池化，输出尺寸(1,1)（看博客说明，应该是最后两维变成1,1）
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))      # 
         self.rep_dim = 512 * block.expansion
 
         for m in self.modules():
@@ -56,8 +56,7 @@ class ResNet(nn.Module):
                 elif isinstance(m, BasicBlock):
                     nn.init.constant_(m.bn2.weight, 0)
 
-# blocks指定残差块的数量？没懂什么是残差块
-    def _make_layer(self, block, planes, blocks, stride=1, dilate=False):  # 基础块的类型(是BasicBlock还是Bottleneck)、通道、块的数量
+    def _make_layer(self, block, planes, blocks, stride=1, dilate=False):  
         norm_layer = self._norm_layer
         downsample = None
         previous_dilation = self.dilation
@@ -95,12 +94,12 @@ class ResNet(nn.Module):
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
 
-# 分层专用语句
+
 #         x1 = self.layer3(x);
 #         x2 = self.layer4(x1);
 #
 #         x2 = self.avgpool(x2)
-#         x2 = torch.flatten(x2, 1)  #只保留1维之前的维度，后面的展开成1维的。
+#         x2 = torch.flatten(x2, 1) 。
 
         # x2 = self.avgpool(x2)
         # x2 = torch.flatten(x2, 1)
@@ -108,7 +107,7 @@ class ResNet(nn.Module):
 
 
         return x
-        # return x1,x2 # x1是倒数第二层特征，x2是最后一层特征，原本是处理avg最后一层，所以我们还是保持不变，只要把倒数第二层拿出来处理就行，最后一层拿出来就直接用就行
+        
 
     def forward(self, x):
         return self._forward_impl(x)
