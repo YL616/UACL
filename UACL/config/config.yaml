@@ -6,6 +6,7 @@
 #ImageNet-Dogs    19500 15      ./dataset
 #Tiny-ImageNet    100000 200    ./dataset
 # general
+
 seed: 42
 workers: 8
 dataset_dir:  "./datasets"    #"./datasets"
