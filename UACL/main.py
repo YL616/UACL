@@ -68,7 +68,7 @@ def main():
 #         train=False,
 #         transform=transform.Transforms(size=args.image_size).test_transform,
 #     )
-#     dataset_test = data.ConcatDataset([test_dataset_1, test_dataset_2])  # 把CIFAR10数据集的train和test，简单预处理(剪裁大小)后合在一起，当测试集？
+#     dataset_test = data.ConcatDataset([test_dataset_1, test_dataset_2]) 
 #     test_loader = torch.utils.data.DataLoader(
 #         dataset=dataset_test,
 #         batch_size=args.test_batch_size,
@@ -220,8 +220,8 @@ def main():
 
 
 
-#     # Initializing our network with a network trained with CC 初始化一个网络！-------------------------------------------------------------------------------------------------------
-    res = resnet.get_resnet(args.resnet)   # 需要哪个resnet就把哪个的名字传进去
+#     -----------------------------------------------------------------------------------------
+    res = resnet.get_resnet(args.resnet)  
     net = network.Network(res, args.feature_dim, args.class_num)
     net = net.to('cuda')
     # print(net)
@@ -229,7 +229,7 @@ def main():
 
 
 
-    checkpoint = torch.load('runCC_image_dogs_checkpoint_1000.tar', map_location=torch.device('cuda:0'));  #runCC_image_dogs_checkpoint_1000.tar 用CC代码跑ImageNet-Dogs数据集，第1000步的参数结果
+    checkpoint = torch.load('runCC_image_dogs_checkpoint_1000.tar', map_location=torch.device('cuda:0'));  
 
     new_state_dict = OrderedDict()   
 
