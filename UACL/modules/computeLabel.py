@@ -3,6 +3,7 @@ import torch
 import numpy as np
 import torch.nn.functional as F
 
+
 def deleteHigh_Uncertainty(cosine_similarity_matrix,uncertainty,batch_size,k_similar,k_uncertrain,k_cut):
     cosine_similarity_matrix = torch.tensor(cosine_similarity_matrix)
     top_k_values,top_k_indexs = torch.topk(cosine_similarity_matrix,k_similar,dim=1,largest=True)
