@@ -143,6 +143,7 @@ class IRRA(nn.Module):
         return ret
 
 
+
 def build_model(args, num_classes=11003):
     model = IRRA(args, num_classes)
     # covert model to fp16
