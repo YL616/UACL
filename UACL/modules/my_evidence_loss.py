@@ -7,7 +7,6 @@ from torch import nn
 
 def compute_cosine_similarity(z_i,z_j,batch_size):
     cosine_similarity_matrix = np.zeros((batch_size,batch_size))
-    # 打印相似度
     for i in range(batch_size):
         for j in range(batch_size):
             cosine_similarity_matrix[i][j] = torch.cosine_similarity(z_i[i], z_j[j], dim=0, eps=1e-08)  
