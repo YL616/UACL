@@ -46,7 +46,7 @@ class IRRA(nn.Module):
                 nn.init.normal_(block.mlp.c_fc.weight, std=fc_std)
                 nn.init.normal_(block.mlp.c_proj.weight, std=proj_std)
 
-            # init cross attn
+  
             nn.init.normal_(self.cross_attn.in_proj_weight, std=attn_std)
             nn.init.normal_(self.cross_attn.out_proj.weight, std=proj_std)
 
