@@ -5,6 +5,7 @@ import math
 import torch.nn.functional as F
 import numpy as np
 
+
 def relu_evidence(y):
     return F.relu(y)
 def exp_evidence(y):
