@@ -8,20 +8,6 @@ import os
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1";
 
 
-def C3_contrastive_mask(z_i, z_j, batch_size):
-    print("z_i",z_i.shape,list(z_i))
-    z = torch.cat((z_i, z_j), dim=0)
-    multiply = torch.matmul(z, z.T)
-    # print(z)
-
-    a = torch.ones([batch_size])
-    mask = 2 * (torch.diag(a, -batch_size) + torch.diag(a, batch_size) + torch.eye(2 * batch_size))
-    mask = mask.cuda()
-    multiply = multiply.cuda()
-
-    return multiply,mask
-
-
 def relu_evidence(y):
     return F.relu(y)
 
